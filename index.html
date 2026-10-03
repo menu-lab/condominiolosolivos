@@ -1,1 +1,321 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Club House · Condominio Los Olivos de Maipú</title>
+  
+  <!-- Favicon Oficial -->
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    body {
+      background-color: #0f2c25;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Contenedor central móvil vertical 900x1700 relativo */
+    .app-container {
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+      aspect-ratio: 529 / 1024;
+      background-image: url('menu_3.jpg');
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+    }
+
+    /* Zonas activas invisibles con efecto de pulsación */
+    .tap-zone {
+      position: absolute;
+      cursor: pointer;
+      border-radius: 14px;
+      transition: transform 0.12s ease, background-color 0.12s ease;
+    }
+
+    .tap-zone:active {
+      transform: scale(0.96);
+      background-color: rgba(255, 255, 255, 0.22);
+    }
+
+    /* 1. MÓDULO CENTRAL HORIZONTAL (4 BOTONES) */
+    .btn-h-cierre   { top: 41.5%; left: 6.5%; width: 22.5%; height: 16%; }
+    .btn-h-llaves   { top: 41.5%; left: 30.0%; width: 21.0%; height: 16%; }
+    .btn-h-quincho  { top: 41.5%; left: 52.0%; width: 22.0%; height: 16%; }
+    .btn-h-aseo     { top: 41.5%; left: 75.0%; width: 20.0%; height: 16%; }
+
+    /* 2. CUADRÍCULA DE BOTONES CUADRADOS */
+    /* Fila 1 */
+    .btn-muros      { top: 63.2%; left: 6.6%; width: 28.0%; height: 13.5%; }
+    .btn-parrilla   { top: 63.2%; left: 36.8%; width: 26.5%; height: 13.5%; }
+    .btn-inflables  { top: 63.2%; left: 65.2%; width: 27.5%; height: 13.5%; }
+
+    /* Fila 2 */
+    .btn-ubicacion  { top: 78.0%; left: 3.5%; width: 32.0%; height: 13.5%; border-radius: 18px; }
+    .btn-aforo      { top: 78.0%; left: 36.8%; width: 26.5%; height: 13.5%; }
+    .btn-mascotas   { top: 78.0%; left: 65.2%; width: 27.5%; height: 13.5%; }
+
+    /* 3. MODAL POPUP PARA DESPLEGAR CADA REGLA */
+    .modal-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(10, 25, 20, 0.78);
+      backdrop-filter: blur(5px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+      z-index: 99;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      background: #ffffff;
+      width: 100%;
+      border-radius: 24px;
+      padding: 26px 22px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.45);
+      border-top: 6px solid #4a6b41;
+      transform: translateY(20px);
+      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .modal-overlay.active .modal-card {
+      transform: translateY(0);
+    }
+
+    .modal-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 8px;
+      background: #eef5eb;
+      color: #3b5f30;
+      margin-bottom: 10px;
+    }
+
+    .modal-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: #263823;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .modal-body {
+      font-size: 14.5px;
+      line-height: 1.55;
+      color: #455048;
+      margin-bottom: 22px;
+    }
+
+    .modal-body ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .modal-body li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 8px;
+    }
+
+    .modal-body li::before {
+      content: "✔";
+      position: absolute;
+      left: 0;
+      color: #5c834a;
+      font-weight: bold;
+    }
+
+    .btn-close {
+      width: 100%;
+      padding: 13px;
+      border: none;
+      border-radius: 12px;
+      background: #344830;
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .btn-close:active {
+      background: #1f2e1c;
+    }
+
+    .btn-action-map {
+      background: #b85434;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <main class="app-container">
+    <!-- MÓDULO HORIZONTAL CENTRAL -->
+    <div class="tap-zone btn-h-cierre" onclick="showInfo('horarios')"></div>
+    <div class="tap-zone btn-h-llaves" onclick="showInfo('llaves')"></div>
+    <div class="tap-zone btn-h-quincho" onclick="showInfo('quincho')"></div>
+    <div class="tap-zone btn-h-aseo" onclick="showInfo('aseo')"></div>
+
+    <!-- CUADRÍCULA DE BOTONES INFERIORES -->
+    <div class="tap-zone btn-muros" onclick="showInfo('muros')"></div>
+    <div class="tap-zone btn-parrilla" onclick="showInfo('parrilla')"></div>
+    <div class="tap-zone btn-inflables" onclick="showInfo('inflables')"></div>
+
+    <div class="tap-zone btn-ubicacion" onclick="showInfo('ubicacion')"></div>
+    <div class="tap-zone btn-aforo" onclick="showInfo('aforo')"></div>
+    <div class="tap-zone btn-mascotas" onclick="showInfo('mascotas')"></div>
+
+    <!-- MODAL POPUP -->
+    <aside class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+      <div class="modal-card" id="modalCard">
+        <div class="modal-badge" id="modalBadge">REGLAMENTO</div>
+        <h2 class="modal-title" id="modalTitle">Título</h2>
+        <div class="modal-body" id="modalBody">Contenido</div>
+        <button type="button" class="btn-close" onclick="forceClose()">ENTENDIDO</button>
+      </div>
+    </aside>
+  </main>
+
+  <script>
+    const dataReglas = {
+      horarios: {
+        badge: "01 · HORARIOS Y RUIDO",
+        title: "Horarios de Uso y Cierre",
+        body: `<ul>
+          <li><strong>Domingo a Jueves:</strong> 12:00 a 22:00 hrs.</li>
+          <li><strong>Viernes y Sábado:</strong> 12:00 a 01:00 hrs.</li>
+          <li>Corte estricto de música y ruidos molestos al cumplirse el horario fijado.</li>
+        </ul>`
+      },
+      llaves: {
+        badge: "02 · RECEPCIÓN Y SALIDA",
+        title: "Devolución de Llaves",
+        body: `<ul>
+          <li>El Club House se puede entregar al día siguiente hasta las <strong>10:00 AM como máximo</strong>.</li>
+          <li>Revisión conjunta del inventario con la administración.</li>
+        </ul>`
+      },
+      quincho: {
+        badge: "03 · ÁREA DE ASADOS",
+        title: "Zona de Quincho",
+        body: `<ul>
+          <li>Parrillas entregadas <strong>100% apagadas</strong> y sin brasas vivas.</li>
+          <li>Mesón de granito libre de grasas y residuos de comida.</li>
+        </ul>`
+      },
+      aseo: {
+        badge: "04 · LIMPIEZA GENERAL",
+        title: "Aseo y Residuos",
+        body: `<ul>
+          <li>Baños y cocina deben quedar limpios y ordenados.</li>
+          <li>Basura amarrada en bolsas negras resistentes en los contenedores designados.</li>
+        </ul>`
+      },
+      muros: {
+        badge: "05 · INFRAESTRUCTURA",
+        title: "Cuidado de Muros y Techos",
+        body: `<ul>
+          <li>Globos <strong>EXCLUSIVAMENTE</strong> en las maderas diseñadas para este propósito.</li>
+          <li>Prohibido cinta doble contacto o pegamentos en muros, ventanas y empavonados.</li>
+          <li>Prohibido perforar muros o adherir cosas al techo del cobertizo.</li>
+        </ul>`
+      },
+      parrilla: {
+        badge: "06 · SEGURIDAD CONTRA FUEGO",
+        title: "Manejo de la Parrilla",
+        body: `<ul>
+          <li>Parrilla completamente apagada y fría al momento de retirarse.</li>
+          <li>Verificar que no quede carbón encendido ni riesgo de chispas.</li>
+        </ul>`
+      },
+      inflables: {
+        badge: "07 · JUEGOS Y JARDÍN",
+        title: "Juegos Inflables",
+        body: `<ul>
+          <li>Solo se permiten juegos inflables de <strong>tamaño mediano</strong>.</li>
+          <li><strong>PROHIBIDO</strong> instalar juegos sobre el pasto o áreas verdes.</li>
+        </ul>`
+      },
+      aforo: {
+        badge: "08 · CAPACIDAD Y AUTOS",
+        title: "Aforo y Estacionamientos",
+        body: `<ul>
+          <li><strong>Aforo máximo permitido:</strong> 50 personas (conteo total entre niños y adultos).</li>
+          <li><strong>Estacionamientos asignados:</strong> 5 vehículos para el evento.</li>
+        </ul>`
+      },
+      mascotas: {
+        badge: "09 · CONVIVENCIA",
+        title: "Mascotas y Espacios Comunes",
+        body: `<ul>
+          <li><strong>Mascotas:</strong> Permitidas sin ninguna restricción.</li>
+          <li>Recuerde: los espacios son de todos los vecinos, cuidémoslos con orgullo.</li>
+        </ul>`
+      },
+      ubicacion: {
+        badge: "10 · CÓMO LLEGAR",
+        title: "Condominio Los Olivos de Maipú",
+        body: `<p style="margin-bottom:12px;">Comparte la dirección y mapa directo a tus invitados por WhatsApp o Waze:</p>
+          <button type="button" class="btn-close btn-action-map" onclick="openMap()">📍 ABRIR EN GOOGLE MAPS</button>`
+      }
+    };
+
+    function showInfo(key) {
+      const item = dataReglas[key];
+      if (!item) return;
+
+      document.getElementById('modalBadge').innerText = item.badge;
+      document.getElementById('modalTitle').innerText = item.title;
+      document.getElementById('modalBody').innerHTML = item.body;
+      document.getElementById('modalOverlay').classList.add('active');
+    }
+
+    function closeModal(e) {
+      if (e.target.id === 'modalOverlay') {
+        forceClose();
+      }
+    }
+
+    function forceClose() {
+      document.getElementById('modalOverlay').classList.remove('active');
+    }
+
+    function openMap() {
+      window.open('https://maps.google.com/?q=Condominio+Los+Olivos+Maipu', '_blank');
+    }
+  </script>
+</body>
+</html>
