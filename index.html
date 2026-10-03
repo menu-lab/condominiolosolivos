@@ -47,56 +47,84 @@
       display: block;
     }
 
-    /* CINTA DINÁMICA DE AVISOS CLAVE (TICKER) */
-    .banner-noticias {
+    /* BOTÓN DE LOCUCIÓN / VOZ EN OFF (SUPERIOR DERECHA) */
+    .btn-audio-voice {
       position: absolute;
-      top: 36.8%;
-      left: 5%;
-      width: 90%;
-      background: rgba(18, 48, 38, 0.88);
-      border: 1px solid rgba(135, 185, 125, 0.4);
-      backdrop-filter: blur(4px);
-      border-radius: 10px;
-      padding: 6px 12px;
+      top: 3.2%;
+      right: 5.0%;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+      border: 3px solid #5a8249;
       display: flex;
+      justify-content: center;
       align-items: center;
-      gap: 8px;
-      z-index: 40;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+      cursor: pointer;
+      z-index: 120;
+      transition: transform 0.15s ease, background-color 0.15s ease;
       line-height: normal;
     }
 
-    .banner-icon {
-      font-size: 14px;
-      flex-shrink: 0;
+    .btn-audio-voice:active {
+      transform: scale(0.90);
+      background-color: #eaf5e6;
     }
 
-    .banner-text-track {
+    .btn-audio-voice svg {
+      width: 24px;
+      height: 24px;
+      fill: #27431e;
+    }
+
+    .btn-audio-voice.playing {
+      animation: pulse-audio 1.1s infinite alternate;
+      border-color: #b85434;
+      background-color: #fff6f2;
+    }
+
+    @keyframes pulse-audio {
+      0% { transform: scale(1); box-shadow: 0 0 6px rgba(184, 84, 52, 0.4); }
+      100% { transform: scale(1.14); box-shadow: 0 0 20px rgba(184, 84, 52, 0.9); }
+    }
+
+    /* TEXTO EN MOVIMIENTO EN LA FRANJA INTERMEDIA */
+    .ticker-franja {
+      position: absolute;
+      top: 58.2%;
+      left: 0;
       width: 100%;
+      height: 4.0%;
+      display: flex;
+      align-items: center;
       overflow: hidden;
       white-space: nowrap;
-      position: relative;
+      pointer-events: none;
+      z-index: 35;
     }
 
-    .banner-text {
+    .ticker-contenido {
       display: inline-block;
-      font-size: 11.5px;
-      font-weight: 600;
-      color: #e2f2db;
-      letter-spacing: 0.3px;
-      animation: ticker-anim 16s linear infinite;
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #f0f7ec;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 0 6px rgba(14, 40, 30, 0.9);
+      letter-spacing: 0.4px;
+      padding-left: 100%;
+      animation: ticker-suave 34s linear infinite;
     }
 
-    @keyframes ticker-anim {
-      0% { transform: translateX(100%); }
+    @keyframes ticker-suave {
+      0% { transform: translateX(0); }
       100% { transform: translateX(-100%); }
     }
 
-    /* EFECTO HOJAS CAYENDO SUAVEMENTE */
+    /* HOJAS CAYENDO SUAVEMENTE */
     .leaf-particle {
       position: absolute;
       pointer-events: none;
-      z-index: 30;
+      z-index: 25;
       opacity: 0.75;
       animation-name: fall-sway;
       animation-iteration-count: infinite;
@@ -125,49 +153,7 @@
       }
     }
 
-    /* BOTÓN DE LOCUCIÓN / VOZ FLOTANTE */
-    .btn-audio-voice {
-      position: absolute;
-      top: 3.5%;
-      right: 5.5%;
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.94);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.45);
-      border: 2px solid #5a8249;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      z-index: 50;
-      transition: transform 0.15s ease, background 0.15s ease;
-      line-height: normal;
-    }
-
-    .btn-audio-voice:active {
-      transform: scale(0.90);
-      background: #eaf5e6;
-    }
-
-    .btn-audio-voice svg {
-      width: 22px;
-      height: 22px;
-      fill: #2d4f23;
-    }
-
-    .btn-audio-voice.playing {
-      animation: pulse-audio 1.2s infinite alternate;
-      border-color: #b85434;
-      background: #fff6f2;
-    }
-
-    @keyframes pulse-audio {
-      0% { transform: scale(1); box-shadow: 0 0 5px rgba(184, 84, 52, 0.4); }
-      100% { transform: scale(1.12); box-shadow: 0 0 16px rgba(184, 84, 52, 0.85); }
-    }
-
-    /* ZONAS INTERACTIVAS INVISIBLES SOBRE EL LIENZO */
+    /* ZONAS TÁCTILES INVISIBLES SOBRE EL LIENZO */
     .tap-btn {
       position: absolute;
       cursor: pointer;
@@ -210,7 +196,7 @@
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.2s ease;
-      z-index: 100;
+      z-index: 150;
       line-height: normal;
     }
 
@@ -308,19 +294,16 @@
     <!-- IMAGEN DE FONDO OFICIAL MENU.JPG -->
     <img src="menu.jpg" alt="Club House Los Olivos" class="bg-canvas">
 
-    <!-- CINTA DE INFORMACIÓN Y RECORDATORIOS -->
-    <div class="banner-noticias">
-      <span class="banner-icon">🌿</span>
-      <div class="banner-text-track">
-        <span class="banner-text">
-          🔔 Recuerda: Entrega al día siguiente hasta las 10:00 AM • Dejar baños y cocina limpios • Basura en bolsas cerradas • Aforo máx: 50 personas • ¡Cuidemos este espacio de todos!
-        </span>
+    <!-- TEXTO EN MOVIMIENTO EN LA FRANJA INTERMEDIA -->
+    <div class="ticker-franja">
+      <div class="ticker-contenido">
+        🌿 Entrega del recinto al día siguiente hasta las 10:00 AM &nbsp;&nbsp;•&nbsp;&nbsp; Cocina y baños limpios &nbsp;&nbsp;•&nbsp;&nbsp; Basura en bolsas separadas &nbsp;&nbsp;•&nbsp;&nbsp; Parrillas 100% apagadas &nbsp;&nbsp;•&nbsp;&nbsp; Aforo máximo: 50 personas &nbsp;&nbsp;•&nbsp;&nbsp; 5 estacionamientos asignados &nbsp;&nbsp;•&nbsp;&nbsp; ¡Cuidemos este espacio que nos sirve a todos! 🌿
       </div>
     </div>
 
-    <!-- BOTÓN DE LOCUCIÓN ENTRE LAS HOJAS -->
+    <!-- BOTÓN DE LOCUCIÓN VISIBLE -->
     <button type="button" class="btn-audio-voice" id="btnAudio" onclick="toggleVoiceAudio()" title="Escuchar resumen hablado" aria-label="Escuchar resumen hablado">
-      <svg id="iconSpeaker" viewBox="0 0 24 24">
+      <svg viewBox="0 0 24 24">
         <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
       </svg>
     </button>
@@ -355,7 +338,7 @@
   </div>
 
   <script>
-    // GENERADOR DE HOJAS CAYENDO CON MOVIMIENTO SUAVE
+    // GENERADOR DE HOJAS CAYENDO
     const wrapper = document.getElementById('appWrapper');
     const leafSVGs = [
       `<svg width="18" height="24" viewBox="0 0 20 28" fill="#588147"><path d="M10 0 C18 6, 20 18, 10 28 C0 18, 2 6, 10 0 Z"/></svg>`,
@@ -368,9 +351,9 @@
       leaf.className = 'leaf-particle';
       leaf.innerHTML = leafSVGs[Math.floor(Math.random() * leafSVGs.length)];
       
-      const leftPos = Math.random() * 85 + 5; // entre 5% y 90%
-      const duration = Math.random() * 7 + 8;  // entre 8s y 15s
-      const delay = Math.random() * 5;
+      const leftPos = Math.random() * 85 + 5;
+      const duration = Math.random() * 7 + 8;
+      const delay = Math.random() * 4;
       
       leaf.style.left = `${leftPos}%`;
       leaf.style.animationDuration = `${duration}s`;
@@ -383,8 +366,7 @@
       }, (duration + delay) * 1000);
     }
 
-    // Generar hojas periódicamente sin saturar la pantalla
-    setInterval(createLeaf, 2200);
+    setInterval(createLeaf, 2400);
     for (let i = 0; i < 4; i++) createLeaf();
 
     // DATOS DE LOS MODALES
@@ -457,7 +439,7 @@
       window.open('https://maps.google.com/?q=Condominio+Los+Olivos+Maipu', '_blank');
     }
 
-    // VOZ EN OFF
+    // VOZ EN OFF COMPLETA Y CORDIAL
     let isSpeaking = false;
     const voiceMessage = "¡Hola vecina, hola vecino! Les damos la más cordial bienvenida al Club House del Condominio Los Olivos de Maipú. Deseamos que disfruten al máximo su celebración junto a su familia y amigos. Para que todo resulte perfecto, recuerden que los días de semana el evento termina a las 22 horas, y los viernes y sábados finaliza a la 1 de la madrugada. No se preocupen por la entrega inmediata de noche: tienen plazo hasta el día siguiente a las 10 de la mañana para ordenar con calma y hacer la devolución. Les pedimos entregar la cocina y los baños impecables, tal como los recibieron, con la basura ordenada en bolsas separadas y la parrilla completamente apagada. Recuerden que el aforo es de 50 personas contando adultos y niños, disponen de 5 estacionamientos para sus visitas y sus mascotas son siempre bienvenidas. Sigamos estas normas para pasarlo excelente y cuidar juntos este lugar que nos sirve a todos. ¡Que tengan una fiesta maravillosa!";
 
