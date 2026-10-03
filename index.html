@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Decreto Casa House · Condominio Los Olivos de Maipú</title>
   
-  <!-- Favicon Oficial Los Olivos -->
   <link rel="icon" type="image/png" href="favicon.png">
 
   <style>
@@ -29,7 +28,6 @@
       overflow-x: hidden;
     }
 
-    /* Contenedor responsivo móvil (paño completo) */
     .app-wrapper {
       position: relative;
       width: 100%;
@@ -47,7 +45,25 @@
       display: block;
     }
 
-    /* BOTÓN DE LOCUCIÓN / VOZ EN OFF (SUPERIOR DERECHA) */
+    /* TÍTULO INSTITUCIONAL DECRETOS Y NORMAS */
+    .titulo-decretos {
+      position: absolute;
+      top: 36.6%;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      font-family: "Impact", "Arial Black", "Trebuchet MS", sans-serif;
+      font-size: 21px;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+      color: #9cd188;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9), 0 0 10px rgba(16, 48, 32, 0.85);
+      z-index: 40;
+      pointer-events: none;
+      line-height: normal;
+    }
+
+    /* BOTÓN DE LOCUCIÓN FEMENINA */
     .btn-audio-voice {
       position: absolute;
       top: 3.2%;
@@ -89,7 +105,7 @@
       100% { transform: scale(1.14); box-shadow: 0 0 20px rgba(184, 84, 52, 0.9); }
     }
 
-    /* HUINCHA DE LECTURA BAJADA AL ESPACIO INTERMEDIO */
+    /* HUINCHA DE LECTURA */
     .ticker-franja {
       position: absolute;
       top: 60.5%;
@@ -153,7 +169,7 @@
       }
     }
 
-    /* ZONAS TÁCTILES INVISIBLES SOBRE EL LIENZO */
+    /* ZONAS TÁCTILES */
     .tap-btn {
       position: absolute;
       cursor: pointer;
@@ -168,13 +184,13 @@
       transform: scale(0.96);
     }
 
-    /* 1. MÓDULO HORIZONTAL CENTRAL (4 BOTONES) */
+    /* 1. MÓDULO HORIZONTAL CENTRAL */
     .btn-horarios   { top: 41.5%; left: 6.8%; width: 20.8%; height: 16.0%; }
     .btn-salida     { top: 41.5%; left: 29.8%; width: 20.5%; height: 16.0%; }
     .btn-quincho-top{ top: 41.5%; left: 52.0%; width: 20.5%; height: 16.0%; }
     .btn-aseo       { top: 41.5%; left: 74.0%; width: 19.5%; height: 16.0%; }
 
-    /* 2. CUADRÍCULA DE BOTONES CUADRADOS INFERIORES */
+    /* 2. CUADRÍCULA DE BOTONES CUADRADOS */
     .btn-muros      { top: 62.8%; left: 6.8%; width: 27.2%; height: 13.6%; }
     .btn-quincho    { top: 62.8%; left: 36.5%; width: 26.8%; height: 13.6%; }
     .btn-inflables  { top: 62.8%; left: 65.5%; width: 27.5%; height: 13.6%; }
@@ -291,17 +307,19 @@
 <body>
 
   <div class="app-wrapper" id="appWrapper">
-    <!-- IMAGEN DE FONDO OFICIAL MENU.JPG -->
     <img src="menu.jpg" alt="Decreto Casa House Los Olivos" class="bg-canvas">
 
-    <!-- HUINCHA DE LECTURA BAJADA -->
+    <!-- TÍTULO SUPERIOR DE LA BOTONERA -->
+    <div class="titulo-decretos">DECRETOS Y NORMAS</div>
+
+    <!-- HUINCHA DE TEXTO -->
     <div class="ticker-franja">
       <div class="ticker-contenido">
         🌿 Decreto Casa House: Entrega al día siguiente hasta las 10:00 AM &nbsp;&nbsp;•&nbsp;&nbsp; Cocina y baños limpios &nbsp;&nbsp;•&nbsp;&nbsp; Basura en bolsas separadas &nbsp;&nbsp;•&nbsp;&nbsp; Parrillas 100% apagadas &nbsp;&nbsp;•&nbsp;&nbsp; Aforo máx: 50 personas &nbsp;&nbsp;•&nbsp;&nbsp; 5 estacionamientos &nbsp;&nbsp;•&nbsp;&nbsp; ¡Cuidemos este espacio que nos sirve a todos! 🌿
       </div>
     </div>
 
-    <!-- BOTÓN DE LOCUCIÓN VISIBLE -->
+    <!-- BOTÓN DE LOCUCIÓN FEMENINA -->
     <button type="button" class="btn-audio-voice" id="btnAudio" onclick="toggleVoiceAudio()" title="Escuchar resumen hablado" aria-label="Escuchar resumen hablado">
       <svg viewBox="0 0 24 24">
         <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
@@ -310,23 +328,21 @@
 
     <audio id="audioTrack" src="audio.mp3" preload="none"></audio>
 
-    <!-- BOTONES ZONA SUPERIOR HORIZONTAL -->
+    <!-- ZONAS INTERACTIVAS -->
     <div class="tap-btn btn-horarios" onclick="showInfo('horarios')"></div>
     <div class="tap-btn btn-salida" onclick="showInfo('salida')"></div>
     <div class="tap-btn btn-quincho-top" onclick="showInfo('quincho')"></div>
     <div class="tap-btn btn-aseo" onclick="showInfo('aseo')"></div>
 
-    <!-- BOTONES CUADRÍCULA INFERIOR -->
     <div class="tap-btn btn-muros" onclick="showInfo('muros')"></div>
     <div class="tap-btn btn-quincho" onclick="showInfo('quincho')"></div>
     <div class="tap-btn btn-inflables" onclick="showInfo('inflables')"></div>
 
-    <!-- FOOTER FIJO UBICACIÓN -->
     <div class="tap-btn btn-ubicacion" onclick="showInfo('ubicacion')"></div>
     <div class="tap-btn btn-aforo" onclick="showInfo('aforo')"></div>
     <div class="tap-btn btn-mascotas" onclick="showInfo('mascotas')"></div>
 
-    <!-- MODAL POPUP -->
+    <!-- MODAL -->
     <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
       <div class="modal-card">
         <div class="modal-badge" id="modalBadge">DECRETO CASA HOUSE</div>
@@ -338,7 +354,7 @@
   </div>
 
   <script>
-    // GENERADOR DE HOJAS CAYENDO
+    // HOJAS CAYENDO
     const wrapper = document.getElementById('appWrapper');
     const leafSVGs = [
       `<svg width="18" height="24" viewBox="0 0 20 28" fill="#588147"><path d="M10 0 C18 6, 20 18, 10 28 C0 18, 2 6, 10 0 Z"/></svg>`,
@@ -369,7 +385,7 @@
     setInterval(createLeaf, 2400);
     for (let i = 0; i < 4; i++) createLeaf();
 
-    // DATOS DE LOS MODALES ACTUALIZADOS A DECRETO CASA HOUSE
+    // DATOS DE LOS MODALES
     const dataReglas = {
       horarios: {
         badge: "01 · HORARIOS Y RUIDO",
@@ -439,7 +455,7 @@
       window.open('https://maps.google.com/?q=Condominio+Los+Olivos+Maipu', '_blank');
     }
 
-    // VOZ NATURAL Y OPTIMIZADA: DECRETO CASA HOUSE
+    // MOTOR DE VOZ FEMENINA NATURAL
     let isSpeaking = false;
     let availableVoices = [];
 
@@ -453,18 +469,29 @@
       window.speechSynthesis.onvoiceschanged = cargarVoces;
     }
 
-    function seleccionarVozNatural() {
+    function seleccionarVozFemenina() {
       if (!availableVoices.length) cargarVoces();
-      const vocesEspanol = availableVoices.filter(v => v.lang.startsWith('es'));
-      const vozNatural = vocesEspanol.find(v => 
-        v.name.includes('Natural') || 
-        v.name.includes('Google') || 
-        v.name.includes('Premium') ||
-        v.name.includes('Paulina') || 
-        v.name.includes('Sofia') ||
-        v.name.includes('Mónica')
-      );
-      return vozNatural || vocesEspanol[0] || null;
+      const vocesEs = availableVoices.filter(v => v.lang.startsWith('es'));
+      
+      // Filtro para priorizar perfiles de voz femenina natural
+      const femenina = vocesEs.find(v => {
+        const n = v.name.toLowerCase();
+        return (
+          n.includes('paulina') || 
+          n.includes('monica') || 
+          n.includes('mónica') || 
+          n.includes('sofia') || 
+          n.includes('sofía') || 
+          n.includes('francisca') || 
+          n.includes('sabina') || 
+          n.includes('helena') || 
+          n.includes('victoria') || 
+          n.includes('female') || 
+          (n.includes('google') && n.includes('español'))
+        );
+      });
+
+      return femenina || vocesEs[0] || null;
     }
 
     const voiceMessage = "¡Hola vecina, hola vecino! Les damos la más cordial bienvenida a nuestra Casa House del Condominio Los Olivos de Maipú. Deseamos que disfruten al máximo su celebración junto a su familia y amigos. Para que todo resulte perfecto según el Decreto Casa House, recuerden que los días de semana el evento termina a las 22 horas, y los viernes y sábados finaliza a la 1 de la madrugada. No se preocupen por la entrega inmediata de noche: tienen plazo hasta el día siguiente a las 10 de la mañana para ordenar con calma y hacer la devolución. Les pedimos entregar la cocina y los baños impecables, tal como los recibieron, con la basura ordenada en bolsas separadas y la parrilla completamente apagada. Recuerden que el aforo es de 50 personas contando adultos y niños, disponen de 5 estacionamientos para sus visitas y sus mascotas son siempre bienvenidas. Sigamos estas normas para pasarlo excelente y cuidar juntos nuestra Casa House que nos sirve a todos. ¡Que tengan una fiesta maravillosa!";
@@ -493,15 +520,15 @@
         audioTrack.onended = () => btn.classList.remove('playing');
       } else if ('speechSynthesis' in window) {
         const utterance = new SpeechSynthesisUtterance(voiceMessage);
-        const vozSeleccionada = seleccionarVozNatural();
+        const vozFem = seleccionarVozFemenina();
 
-        if (vozSeleccionada) {
-          utterance.voice = vozSeleccionada;
+        if (vozFem) {
+          utterance.voice = vozFem;
         }
 
         utterance.lang = 'es-CL';
-        utterance.rate = 0.92;
-        utterance.pitch = 1.05;
+        utterance.rate = 0.90;  // Ritmo pausado y conversacional
+        utterance.pitch = 1.15; // Modulación más aguda y cálida (femenina)
 
         utterance.onstart = () => {
           isSpeaking = true;
