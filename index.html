@@ -28,7 +28,7 @@
       padding: 0;
     }
 
-    /* Contenedor responsivo móvil (paño completo) */
+    /* Contenedor responsivo móvil */
     .app-wrapper {
       position: relative;
       width: 100%;
@@ -46,7 +46,7 @@
       display: block;
     }
 
-    /* BOTÓN DE SONIDO FLOTANTE ENTRE LAS HOJAS */
+    /* BOTÓN DE LOCUCIÓN / VOZ EN OFF FLOTANTE ENTRE LAS HOJAS */
     .btn-audio-voice {
       position: absolute;
       top: 3.5%;
@@ -54,7 +54,7 @@
       width: 46px;
       height: 46px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.94);
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.45);
       border: 2px solid #5a8249;
       display: flex;
@@ -80,6 +80,7 @@
     .btn-audio-voice.playing {
       animation: pulse-audio 1.2s infinite alternate;
       border-color: #b85434;
+      background: #fff6f2;
     }
 
     @keyframes pulse-audio {
@@ -227,14 +228,14 @@
     <!-- IMAGEN DE FONDO OFICIAL MENU.JPG -->
     <img src="menu.jpg" alt="Club House Los Olivos" class="bg-canvas">
 
-    <!-- BOTÓN DE SONIDO / LOCUCIÓN ENTRE LAS HOJAS -->
-    <button type="button" class="btn-audio-voice" id="btnAudio" onclick="toggleVoiceAudio()" title="Escuchar audio resumen" aria-label="Escuchar audio resumen">
+    <!-- BOTÓN DE LOCUCIÓN ENTRE LAS HOJAS -->
+    <button type="button" class="btn-audio-voice" id="btnAudio" onclick="toggleVoiceAudio()" title="Escuchar resumen hablado" aria-label="Escuchar resumen hablado">
       <svg id="iconSpeaker" viewBox="0 0 24 24">
         <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
       </svg>
     </button>
 
-    <!-- AUDIO HTML5 (OPCIONAL SI SUBES UN ARCHIVO AUDIO.MP3) -->
+    <!-- ARCHIVO MP3 OPCIONAL (SI SUBES AUDIO.MP3) -->
     <audio id="audioTrack" src="audio.mp3" preload="none"></audio>
 
     <!-- BOTONES ZONA SUPERIOR HORIZONTAL -->
@@ -269,27 +270,27 @@
       horarios: {
         badge: "01 · HORARIOS Y RUIDO",
         title: "Horarios y Cierre",
-        body: "<ul><li><strong>Domingo a Jueves:</strong> 12:00 a 22:00 hrs.</li><li><strong>Viernes y Sábado:</strong> 12:00 a 01:00 hrs.</li><li>Corte riguroso de música y ruidos al horario fijado.</li></ul>"
+        body: "<ul><li><strong>Domingo a Jueves:</strong> 12:00 a 22:00 hrs.</li><li><strong>Viernes y Sábado:</strong> 12:00 a 01:00 hrs.</li><li>El evento finaliza estrictamente a la 1 de la madrugada con corte de música.</li></ul>"
       },
       salida: {
         badge: "02 · RECEPCIÓN Y LLAVES",
         title: "Salida y Devolución",
-        body: "<ul><li>Entrega del recinto al día siguiente hasta las <strong>10:00 AM como máximo</strong>.</li><li>Revisión conjunta del inventario con la administración.</li></ul>"
+        body: "<ul><li>La fiesta termina a la 1:00 AM, pero tienen plazo de entrega hasta las <strong>10:00 AM del día siguiente</strong>.</li><li>Pueden ordenar temprano en la mañana para entregar a las 10:00 AM impecable.</li></ul>"
       },
       quincho: {
         badge: "03 · QUINCHO Y PARRILLA",
         title: "Parrilla Segura",
-        body: "<ul><li>Parrillas entregadas <strong>100% apagadas</strong> y sin brasas activas.</li><li>Mesones de granito limpios y sin residuos de comida.</li></ul>"
+        body: "<ul><li>Parrillas entregadas <strong>100% apagadas</strong> y sin brasas activas ni cenizas calientes.</li><li>Mesones de granito limpios y sin restos de comida.</li></ul>"
       },
       aseo: {
         badge: "04 · ASEO Y RESIDUOS",
         title: "Limpieza General",
-        body: "<ul><li>Baños y cocina entregados limpios y despejados.</li><li>Basura amarrada en bolsas resistentes dentro de los contenedores habilitados.</li></ul>"
+        body: "<ul><li>Baños y cocina deben quedar impecables, tal como fueron entregados.</li><li>Toda la basura clasificada y amarrada en bolsas separadas en los contenedores.</li></ul>"
       },
       muros: {
         badge: "05 · INFRAESTRUCTURA",
         title: "Cuidado de Muros y Techos",
-        body: "<ul><li>Globos <strong>EXCLUSIVAMENTE</strong> en las maderas habilitadas.</li><li>Cero cinta doble contacto, clavos o pegamentos en muros, ventanas o techos.</li></ul>"
+        body: "<ul><li>Globos <strong>EXCLUSIVAMENTE</strong> en las maderas habilitadas para esto.</li><li>Cero cinta doble contacto, clavos o pegamentos en muros, ventanas o techos.</li></ul>"
       },
       inflables: {
         badge: "06 · JUEGOS Y JARDÍN",
@@ -299,12 +300,12 @@
       aforo: {
         badge: "07 · CAPACIDAD",
         title: "Aforo y Estacionamientos",
-        body: "<ul><li><strong>Aforo máximo:</strong> 50 personas (adultos y niños en total).</li><li><strong>Estacionamientos asignados:</strong> 5 vehículos para el evento.</li></ul>"
+        body: "<ul><li><strong>Aforo máximo permitido:</strong> 50 personas (sumando adultos y niños en total).</li><li><strong>Estacionamientos para visitas:</strong> 5 vehículos asignados al evento.</li></ul>"
       },
       mascotas: {
         badge: "08 · CONVIVENCIA",
         title: "Mascotas y Comunidad",
-        body: "<ul><li>Mascotas <strong>bienvenidas sin restricción</strong>.</li><li>Los espacios comunes son de todos, cuidémoslos con orgullo.</li></ul>"
+        body: "<ul><li>Mascotas <strong>bienvenidas sin restricción</strong>.</li><li>Sigamos las normas para que lo pasemos excelente y cuidemos este espacio que nos sirve a todos.</li></ul>"
       },
       ubicacion: {
         badge: "09 · UBICACIÓN Y ACCESO",
@@ -334,15 +335,14 @@
       window.open('https://maps.google.com/?q=Condominio+Los+Olivos+Maipu', '_blank');
     }
 
-    // SISTEMA DUAL DE VOZ / AUDIO INTERACTIVO
+    // LOCUCIÓN EN VOZ EN OFF ACTUALIZADA Y COMPLETA
     let isSpeaking = false;
-    const voiceMessage = "¡Hola vecina, hola vecino! Les damos la más cordial bienvenida al Club House del Condominio Los Olivos de Maipú. Deseamos de todo corazón que tengan una celebración maravillosa y disfruten al máximo junto a sus seres queridos. Para que todo sea perfecto, recuerden que de domingo a jueves el horario es hasta las 22 horas, y viernes y sábados hasta la 1 de la mañana. Pueden entregar el recinto al día siguiente hasta las 10 de la mañana. Cuiden los muros, usen las maderas para los globos, entreguen la parrilla completamente apagada y recuerden que sus mascotas son siempre bienvenidas. ¡Que lo pasen increíble!";
+    const voiceMessage = "¡Hola vecina, hola vecino! Les damos la más cordial bienvenida al Club House del Condominio Los Olivos de Maipú. Deseamos que disfruten al máximo su celebración junto a su familia y amigos. Para que todo resulte perfecto, recuerden que los días de semana el evento termina a las 22 horas, y los viernes y sábados finaliza a la 1 de la madrugada. No se preocupen por la entrega inmediata de noche: tienen plazo hasta el día siguiente a las 10 de la mañana para ordenar con calma y hacer la devolución. Les pedimos entregar la cocina y los baños impecables, tal como los recibieron, con la basura ordenada en bolsas separadas y la parrilla completamente apagada. Recuerden que el aforo es de 50 personas contando adultos y niños, disponen de 5 estacionamientos para sus visitas y sus mascotas son siempre bienvenidas. Sigamos estas normas para pasarlo excelente y cuidar juntos este lugar que nos sirve a todos. ¡Que tengan una fiesta maravillosa!";
 
     function toggleVoiceAudio() {
       const btn = document.getElementById('btnAudio');
       const audioTrack = document.getElementById('audioTrack');
 
-      // Si existe un archivo audio.mp3 funcional en el servidor, lo reproduce:
       if (audioTrack && audioTrack.src && !audioTrack.paused) {
         audioTrack.pause();
         audioTrack.currentTime = 0;
@@ -350,7 +350,6 @@
         return;
       }
 
-      // Si la síntesis de voz del navegador está sonando, la detenemos:
       if (isSpeaking) {
         window.speechSynthesis.cancel();
         isSpeaking = false;
@@ -358,7 +357,6 @@
         return;
       }
 
-      // Intentar reproducir audio.mp3 primero; si no existe, usar la voz hablada:
       if (audioTrack && audioTrack.readyState >= 2) {
         audioTrack.play();
         btn.classList.add('playing');
