@@ -89,13 +89,13 @@
       100% { transform: scale(1.14); box-shadow: 0 0 20px rgba(184, 84, 52, 0.9); }
     }
 
-    /* TEXTO EN MOVIMIENTO EN LA FRANJA INTERMEDIA */
+    /* HUINCHA DE LECTURA BAJADA AL ESPACIO INTERMEDIO */
     .ticker-franja {
       position: absolute;
-      top: 58.2%;
+      top: 60.5%;
       left: 0;
       width: 100%;
-      height: 4.0%;
+      height: 3.8%;
       display: flex;
       align-items: center;
       overflow: hidden;
@@ -106,16 +106,16 @@
 
     .ticker-contenido {
       display: inline-block;
-      font-size: 14.5px;
+      font-size: 15.5px;
       font-weight: 700;
-      color: #f0f7ec;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 0 6px rgba(14, 40, 30, 0.9);
-      letter-spacing: 0.4px;
+      color: #ffffff;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95), 0 0 8px rgba(10, 30, 20, 0.9);
+      letter-spacing: 0.5px;
       padding-left: 100%;
-      animation: ticker-suave 34s linear infinite;
+      animation: ticker-pausado 48s linear infinite;
     }
 
-    @keyframes ticker-suave {
+    @keyframes ticker-pausado {
       0% { transform: translateX(0); }
       100% { transform: translateX(-100%); }
     }
@@ -294,10 +294,10 @@
     <!-- IMAGEN DE FONDO OFICIAL MENU.JPG -->
     <img src="menu.jpg" alt="Club House Los Olivos" class="bg-canvas">
 
-    <!-- TEXTO EN MOVIMIENTO EN LA FRANJA INTERMEDIA -->
+    <!-- HUINCHA DE LECTURA BAJADA -->
     <div class="ticker-franja">
       <div class="ticker-contenido">
-        🌿 Entrega del recinto al día siguiente hasta las 10:00 AM &nbsp;&nbsp;•&nbsp;&nbsp; Cocina y baños limpios &nbsp;&nbsp;•&nbsp;&nbsp; Basura en bolsas separadas &nbsp;&nbsp;•&nbsp;&nbsp; Parrillas 100% apagadas &nbsp;&nbsp;•&nbsp;&nbsp; Aforo máximo: 50 personas &nbsp;&nbsp;•&nbsp;&nbsp; 5 estacionamientos asignados &nbsp;&nbsp;•&nbsp;&nbsp; ¡Cuidemos este espacio que nos sirve a todos! 🌿
+        🌿 Entrega del recinto al día siguiente hasta las 10:00 AM &nbsp;&nbsp;•&nbsp;&nbsp; Cocina y baños limpios &nbsp;&nbsp;•&nbsp;&nbsp; Basura en bolsas separadas &nbsp;&nbsp;•&nbsp;&nbsp; Parrillas 100% apagadas &nbsp;&nbsp;•&nbsp;&nbsp; Aforo máx: 50 personas &nbsp;&nbsp;•&nbsp;&nbsp; 5 estacionamientos &nbsp;&nbsp;•&nbsp;&nbsp; ¡Cuidemos este espacio que nos sirve a todos! 🌿
       </div>
     </div>
 
@@ -439,8 +439,36 @@
       window.open('https://maps.google.com/?q=Condominio+Los+Olivos+Maipu', '_blank');
     }
 
-    // VOZ EN OFF COMPLETA Y CORDIAL
+    // VOZ NATURAL Y OPTIMIZADA
     let isSpeaking = false;
+    let availableVoices = [];
+
+    function cargarVoces() {
+      if ('speechSynthesis' in window) {
+        availableVoices = window.speechSynthesis.getVoices();
+      }
+    }
+    cargarVoces();
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = cargarVoces;
+    }
+
+    function seleccionarVozNatural() {
+      if (!availableVoices.length) cargarVoces();
+      
+      // Priorizar voces naturales o neuronales en español
+      const vocesEspanol = availableVoices.filter(v => v.lang.startsWith('es'));
+      const vozNatural = vocesEspanol.find(v => 
+        v.name.includes('Natural') || 
+        v.name.includes('Google') || 
+        v.name.includes('Premium') ||
+        v.name.includes('Paulina') || 
+        v.name.includes('Sofia') ||
+        v.name.includes('Mónica')
+      );
+      return vozNatural || vocesEspanol[0] || null;
+    }
+
     const voiceMessage = "¡Hola vecina, hola vecino! Les damos la más cordial bienvenida al Club House del Condominio Los Olivos de Maipú. Deseamos que disfruten al máximo su celebración junto a su familia y amigos. Para que todo resulte perfecto, recuerden que los días de semana el evento termina a las 22 horas, y los viernes y sábados finaliza a la 1 de la madrugada. No se preocupen por la entrega inmediata de noche: tienen plazo hasta el día siguiente a las 10 de la mañana para ordenar con calma y hacer la devolución. Les pedimos entregar la cocina y los baños impecables, tal como los recibieron, con la basura ordenada en bolsas separadas y la parrilla completamente apagada. Recuerden que el aforo es de 50 personas contando adultos y niños, disponen de 5 estacionamientos para sus visitas y sus mascotas son siempre bienvenidas. Sigamos estas normas para pasarlo excelente y cuidar juntos este lugar que nos sirve a todos. ¡Que tengan una fiesta maravillosa!";
 
     function toggleVoiceAudio() {
@@ -467,9 +495,15 @@
         audioTrack.onended = () => btn.classList.remove('playing');
       } else if ('speechSynthesis' in window) {
         const utterance = new SpeechSynthesisUtterance(voiceMessage);
+        const vozSeleccionada = seleccionarVozNatural();
+
+        if (vozSeleccionada) {
+          utterance.voice = vozSeleccionada;
+        }
+
         utterance.lang = 'es-CL';
-        utterance.rate = 0.95;
-        utterance.pitch = 1.0;
+        utterance.rate = 0.92;  // Ritmo ligeramente más pausado para sonar natural
+        utterance.pitch = 1.05; // Tono más cálido y conversacional
 
         utterance.onstart = () => {
           isSpeaking = true;
