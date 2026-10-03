@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Club House · Condominio Los Olivos de Maipú</title>
+  <title>Decreto Casa House · Condominio Los Olivos de Maipú</title>
   
   <!-- Favicon Oficial Los Olivos -->
   <link rel="icon" type="image/png" href="favicon.png">
@@ -29,7 +29,7 @@
       overflow-x: hidden;
     }
 
-    /* Contenedor responsivo móvil */
+    /* Contenedor responsivo móvil (paño completo) */
     .app-wrapper {
       position: relative;
       width: 100%;
@@ -292,12 +292,12 @@
 
   <div class="app-wrapper" id="appWrapper">
     <!-- IMAGEN DE FONDO OFICIAL MENU.JPG -->
-    <img src="menu.jpg" alt="Club House Los Olivos" class="bg-canvas">
+    <img src="menu.jpg" alt="Decreto Casa House Los Olivos" class="bg-canvas">
 
     <!-- HUINCHA DE LECTURA BAJADA -->
     <div class="ticker-franja">
       <div class="ticker-contenido">
-        🌿 Entrega del recinto al día siguiente hasta las 10:00 AM &nbsp;&nbsp;•&nbsp;&nbsp; Cocina y baños limpios &nbsp;&nbsp;•&nbsp;&nbsp; Basura en bolsas separadas &nbsp;&nbsp;•&nbsp;&nbsp; Parrillas 100% apagadas &nbsp;&nbsp;•&nbsp;&nbsp; Aforo máx: 50 personas &nbsp;&nbsp;•&nbsp;&nbsp; 5 estacionamientos &nbsp;&nbsp;•&nbsp;&nbsp; ¡Cuidemos este espacio que nos sirve a todos! 🌿
+        🌿 Decreto Casa House: Entrega al día siguiente hasta las 10:00 AM &nbsp;&nbsp;•&nbsp;&nbsp; Cocina y baños limpios &nbsp;&nbsp;•&nbsp;&nbsp; Basura en bolsas separadas &nbsp;&nbsp;•&nbsp;&nbsp; Parrillas 100% apagadas &nbsp;&nbsp;•&nbsp;&nbsp; Aforo máx: 50 personas &nbsp;&nbsp;•&nbsp;&nbsp; 5 estacionamientos &nbsp;&nbsp;•&nbsp;&nbsp; ¡Cuidemos este espacio que nos sirve a todos! 🌿
       </div>
     </div>
 
@@ -329,7 +329,7 @@
     <!-- MODAL POPUP -->
     <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
       <div class="modal-card">
-        <div class="modal-badge" id="modalBadge">REGLAMENTO</div>
+        <div class="modal-badge" id="modalBadge">DECRETO CASA HOUSE</div>
         <h2 class="modal-title" id="modalTitle">Título</h2>
         <div class="modal-body" id="modalBody">Contenido</div>
         <button type="button" class="btn-close" onclick="forceClose()">ENTENDIDO</button>
@@ -369,7 +369,7 @@
     setInterval(createLeaf, 2400);
     for (let i = 0; i < 4; i++) createLeaf();
 
-    // DATOS DE LOS MODALES
+    // DATOS DE LOS MODALES ACTUALIZADOS A DECRETO CASA HOUSE
     const dataReglas = {
       horarios: {
         badge: "01 · HORARIOS Y RUIDO",
@@ -379,7 +379,7 @@
       salida: {
         badge: "02 · RECEPCIÓN Y LLAVES",
         title: "Salida y Devolución",
-        body: "<ul><li>La fiesta termina a la 1:00 AM, pero tienen plazo de entrega hasta las <strong>10:00 AM del día siguiente</strong>.</li><li>Pueden ordenar temprano en la mañana para entregar a las 10:00 AM impecable.</li></ul>"
+        body: "<ul><li>La fiesta termina a la 1:00 AM, pero tienen plazo de entrega de la Casa House hasta las <strong>10:00 AM del día siguiente</strong>.</li><li>Pueden ordenar temprano en la mañana para entregar a las 10:00 AM impecable.</li></ul>"
       },
       quincho: {
         badge: "03 · QUINCHO Y PARRILLA",
@@ -409,12 +409,12 @@
       mascotas: {
         badge: "08 · CONVIVENCIA",
         title: "Mascotas y Comunidad",
-        body: "<ul><li>Mascotas <strong>bienvenidas sin restricción</strong>.</li><li>Sigamos las normas para que lo pasemos excelente y cuidemos este espacio que nos sirve a todos.</li></ul>"
+        body: "<ul><li>Mascotas <strong>bienvenidas sin restricción</strong>.</li><li>Sigamos el Decreto Casa House para pasarlo excelente y cuidar este espacio que nos sirve a todos.</li></ul>"
       },
       ubicacion: {
         badge: "09 · UBICACIÓN Y ACCESO",
         title: "Condominio Los Olivos de Maipú",
-        body: "<p style='margin-bottom:12px;'>Abre el mapa directo para compartir con tus invitados por WhatsApp o Waze:</p><button type='button' class='btn-close btn-action-map' onclick='openMap()'>📍 ABRIR EN GOOGLE MAPS</button>"
+        body: "<p style='margin-bottom:12px;'>Abre el mapa directo de la Casa House para compartir con tus invitados por WhatsApp o Waze:</p><button type='button' class='btn-close btn-action-map' onclick='openMap()'>📍 ABRIR EN GOOGLE MAPS</button>"
       }
     };
 
@@ -439,7 +439,7 @@
       window.open('https://maps.google.com/?q=Condominio+Los+Olivos+Maipu', '_blank');
     }
 
-    // VOZ NATURAL Y OPTIMIZADA
+    // VOZ NATURAL Y OPTIMIZADA: DECRETO CASA HOUSE
     let isSpeaking = false;
     let availableVoices = [];
 
@@ -455,8 +455,6 @@
 
     function seleccionarVozNatural() {
       if (!availableVoices.length) cargarVoces();
-      
-      // Priorizar voces naturales o neuronales en español
       const vocesEspanol = availableVoices.filter(v => v.lang.startsWith('es'));
       const vozNatural = vocesEspanol.find(v => 
         v.name.includes('Natural') || 
@@ -469,7 +467,7 @@
       return vozNatural || vocesEspanol[0] || null;
     }
 
-    const voiceMessage = "¡Hola vecina, hola vecino! Les damos la más cordial bienvenida al Club House del Condominio Los Olivos de Maipú. Deseamos que disfruten al máximo su celebración junto a su familia y amigos. Para que todo resulte perfecto, recuerden que los días de semana el evento termina a las 22 horas, y los viernes y sábados finaliza a la 1 de la madrugada. No se preocupen por la entrega inmediata de noche: tienen plazo hasta el día siguiente a las 10 de la mañana para ordenar con calma y hacer la devolución. Les pedimos entregar la cocina y los baños impecables, tal como los recibieron, con la basura ordenada en bolsas separadas y la parrilla completamente apagada. Recuerden que el aforo es de 50 personas contando adultos y niños, disponen de 5 estacionamientos para sus visitas y sus mascotas son siempre bienvenidas. Sigamos estas normas para pasarlo excelente y cuidar juntos este lugar que nos sirve a todos. ¡Que tengan una fiesta maravillosa!";
+    const voiceMessage = "¡Hola vecina, hola vecino! Les damos la más cordial bienvenida a nuestra Casa House del Condominio Los Olivos de Maipú. Deseamos que disfruten al máximo su celebración junto a su familia y amigos. Para que todo resulte perfecto según el Decreto Casa House, recuerden que los días de semana el evento termina a las 22 horas, y los viernes y sábados finaliza a la 1 de la madrugada. No se preocupen por la entrega inmediata de noche: tienen plazo hasta el día siguiente a las 10 de la mañana para ordenar con calma y hacer la devolución. Les pedimos entregar la cocina y los baños impecables, tal como los recibieron, con la basura ordenada en bolsas separadas y la parrilla completamente apagada. Recuerden que el aforo es de 50 personas contando adultos y niños, disponen de 5 estacionamientos para sus visitas y sus mascotas son siempre bienvenidas. Sigamos estas normas para pasarlo excelente y cuidar juntos nuestra Casa House que nos sirve a todos. ¡Que tengan una fiesta maravillosa!";
 
     function toggleVoiceAudio() {
       const btn = document.getElementById('btnAudio');
@@ -502,8 +500,8 @@
         }
 
         utterance.lang = 'es-CL';
-        utterance.rate = 0.92;  // Ritmo ligeramente más pausado para sonar natural
-        utterance.pitch = 1.05; // Tono más cálido y conversacional
+        utterance.rate = 0.92;
+        utterance.pitch = 1.05;
 
         utterance.onstart = () => {
           isSpeaking = true;
