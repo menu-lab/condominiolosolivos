@@ -26,6 +26,7 @@
       min-height: 100vh;
       margin: 0;
       padding: 0;
+      overflow-x: hidden;
     }
 
     /* Contenedor responsivo móvil */
@@ -46,7 +47,85 @@
       display: block;
     }
 
-    /* BOTÓN DE LOCUCIÓN / VOZ EN OFF FLOTANTE ENTRE LAS HOJAS */
+    /* CINTA DINÁMICA DE AVISOS CLAVE (TICKER) */
+    .banner-noticias {
+      position: absolute;
+      top: 36.8%;
+      left: 5%;
+      width: 90%;
+      background: rgba(18, 48, 38, 0.88);
+      border: 1px solid rgba(135, 185, 125, 0.4);
+      backdrop-filter: blur(4px);
+      border-radius: 10px;
+      padding: 6px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 40;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+      line-height: normal;
+    }
+
+    .banner-icon {
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .banner-text-track {
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+    }
+
+    .banner-text {
+      display: inline-block;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #e2f2db;
+      letter-spacing: 0.3px;
+      animation: ticker-anim 16s linear infinite;
+    }
+
+    @keyframes ticker-anim {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    /* EFECTO HOJAS CAYENDO SUAVEMENTE */
+    .leaf-particle {
+      position: absolute;
+      pointer-events: none;
+      z-index: 30;
+      opacity: 0.75;
+      animation-name: fall-sway;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+    }
+
+    @keyframes fall-sway {
+      0% {
+        top: -8%;
+        transform: translateX(0) rotate(0deg);
+        opacity: 0;
+      }
+      15% {
+        opacity: 0.85;
+      }
+      50% {
+        transform: translateX(25px) rotate(140deg);
+      }
+      85% {
+        opacity: 0.8;
+      }
+      100% {
+        top: 105%;
+        transform: translateX(-20px) rotate(320deg);
+        opacity: 0;
+      }
+    }
+
+    /* BOTÓN DE LOCUCIÓN / VOZ FLOTANTE */
     .btn-audio-voice {
       position: absolute;
       top: 3.5%;
@@ -95,6 +174,7 @@
       border-radius: 12px;
       transition: background-color 0.12s ease, transform 0.12s ease;
       line-height: normal;
+      z-index: 45;
     }
 
     .tap-btn:active {
@@ -224,9 +304,19 @@
 </head>
 <body>
 
-  <div class="app-wrapper">
+  <div class="app-wrapper" id="appWrapper">
     <!-- IMAGEN DE FONDO OFICIAL MENU.JPG -->
     <img src="menu.jpg" alt="Club House Los Olivos" class="bg-canvas">
+
+    <!-- CINTA DE INFORMACIÓN Y RECORDATORIOS -->
+    <div class="banner-noticias">
+      <span class="banner-icon">🌿</span>
+      <div class="banner-text-track">
+        <span class="banner-text">
+          🔔 Recuerda: Entrega al día siguiente hasta las 10:00 AM • Dejar baños y cocina limpios • Basura en bolsas cerradas • Aforo máx: 50 personas • ¡Cuidemos este espacio de todos!
+        </span>
+      </div>
+    </div>
 
     <!-- BOTÓN DE LOCUCIÓN ENTRE LAS HOJAS -->
     <button type="button" class="btn-audio-voice" id="btnAudio" onclick="toggleVoiceAudio()" title="Escuchar resumen hablado" aria-label="Escuchar resumen hablado">
@@ -235,7 +325,6 @@
       </svg>
     </button>
 
-    <!-- ARCHIVO MP3 OPCIONAL (SI SUBES AUDIO.MP3) -->
     <audio id="audioTrack" src="audio.mp3" preload="none"></audio>
 
     <!-- BOTONES ZONA SUPERIOR HORIZONTAL -->
@@ -266,6 +355,39 @@
   </div>
 
   <script>
+    // GENERADOR DE HOJAS CAYENDO CON MOVIMIENTO SUAVE
+    const wrapper = document.getElementById('appWrapper');
+    const leafSVGs = [
+      `<svg width="18" height="24" viewBox="0 0 20 28" fill="#588147"><path d="M10 0 C18 6, 20 18, 10 28 C0 18, 2 6, 10 0 Z"/></svg>`,
+      `<svg width="14" height="20" viewBox="0 0 20 28" fill="#a47249"><path d="M10 0 C18 6, 20 18, 10 28 C0 18, 2 6, 10 0 Z"/></svg>`,
+      `<svg width="16" height="22" viewBox="0 0 20 28" fill="#75995b"><path d="M10 0 C18 6, 20 18, 10 28 C0 18, 2 6, 10 0 Z"/></svg>`
+    ];
+
+    function createLeaf() {
+      const leaf = document.createElement('div');
+      leaf.className = 'leaf-particle';
+      leaf.innerHTML = leafSVGs[Math.floor(Math.random() * leafSVGs.length)];
+      
+      const leftPos = Math.random() * 85 + 5; // entre 5% y 90%
+      const duration = Math.random() * 7 + 8;  // entre 8s y 15s
+      const delay = Math.random() * 5;
+      
+      leaf.style.left = `${leftPos}%`;
+      leaf.style.animationDuration = `${duration}s`;
+      leaf.style.animationDelay = `${delay}s`;
+      
+      wrapper.appendChild(leaf);
+
+      setTimeout(() => {
+        leaf.remove();
+      }, (duration + delay) * 1000);
+    }
+
+    // Generar hojas periódicamente sin saturar la pantalla
+    setInterval(createLeaf, 2200);
+    for (let i = 0; i < 4; i++) createLeaf();
+
+    // DATOS DE LOS MODALES
     const dataReglas = {
       horarios: {
         badge: "01 · HORARIOS Y RUIDO",
@@ -335,7 +457,7 @@
       window.open('https://maps.google.com/?q=Condominio+Los+Olivos+Maipu', '_blank');
     }
 
-    // LOCUCIÓN EN VOZ EN OFF ACTUALIZADA Y COMPLETA
+    // VOZ EN OFF
     let isSpeaking = false;
     const voiceMessage = "¡Hola vecina, hola vecino! Les damos la más cordial bienvenida al Club House del Condominio Los Olivos de Maipú. Deseamos que disfruten al máximo su celebración junto a su familia y amigos. Para que todo resulte perfecto, recuerden que los días de semana el evento termina a las 22 horas, y los viernes y sábados finaliza a la 1 de la madrugada. No se preocupen por la entrega inmediata de noche: tienen plazo hasta el día siguiente a las 10 de la mañana para ordenar con calma y hacer la devolución. Les pedimos entregar la cocina y los baños impecables, tal como los recibieron, con la basura ordenada en bolsas separadas y la parrilla completamente apagada. Recuerden que el aforo es de 50 personas contando adultos y niños, disponen de 5 estacionamientos para sus visitas y sus mascotas son siempre bienvenidas. Sigamos estas normas para pasarlo excelente y cuidar juntos este lugar que nos sirve a todos. ¡Que tengan una fiesta maravillosa!";
 
