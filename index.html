@@ -28,7 +28,7 @@
       padding: 0;
     }
 
-    /* Contenedor responsivo con imagen visible obligatoria */
+    /* Contenedor responsivo móvil (paño completo) */
     .app-wrapper {
       position: relative;
       width: 100%;
@@ -46,7 +46,7 @@
       display: block;
     }
 
-    /* Zonas táctiles invisibles con feedback de pulsación */
+    /* Zonas interactivas invisibles con feedback háptico visual */
     .tap-btn {
       position: absolute;
       cursor: pointer;
@@ -60,13 +60,13 @@
       transform: scale(0.96);
     }
 
-    /* 1. MÓDULO HORIZONTAL (4 BOTONES) */
+    /* 1. MÓDULO HORIZONTAL CENTRAL (4 BOTONES) */
     .btn-horarios   { top: 41.5%; left: 6.8%; width: 20.8%; height: 16.0%; }
     .btn-salida     { top: 41.5%; left: 29.8%; width: 20.5%; height: 16.0%; }
     .btn-quincho-top{ top: 41.5%; left: 52.0%; width: 20.5%; height: 16.0%; }
     .btn-aseo       { top: 41.5%; left: 74.0%; width: 19.5%; height: 16.0%; }
 
-    /* 2. CUADRÍCULA DE BOTONES CUADRADOS */
+    /* 2. CUADRÍCULA DE BOTONES CUADRADOS INFERIORES */
     /* Fila 1 */
     .btn-muros      { top: 62.8%; left: 6.8%; width: 27.2%; height: 13.6%; }
     .btn-quincho    { top: 62.8%; left: 36.5%; width: 26.8%; height: 13.6%; }
@@ -77,7 +77,7 @@
     .btn-aforo      { top: 77.8%; left: 36.5%; width: 26.8%; height: 13.8%; }
     .btn-mascotas   { top: 77.8%; left: 65.5%; width: 27.5%; height: 13.8%; }
 
-    /* 3. MODAL DESPLEGABLE */
+    /* 3. MODAL POPUP */
     .modal-overlay {
       position: absolute;
       inset: 0;
@@ -185,8 +185,8 @@
 <body>
 
   <div class="app-wrapper">
-    <!-- IMAGEN BASE REAL VISIBLE GARANTIZADA -->
-    <img src="menu_4.jpg" alt="Club House Los Olivos" class="bg-canvas" onerror="this.onerror=null; this.src='menu_3.jpg';">
+    <!-- IMAGEN DE FONDO OFICIAL MENU.JPG -->
+    <img src="menu.jpg" alt="Club House Los Olivos" class="bg-canvas">
 
     <!-- BOTONES ZONA SUPERIOR HORIZONTAL -->
     <div class="tap-btn btn-horarios" onclick="showInfo('horarios')"></div>
@@ -199,6 +199,7 @@
     <div class="tap-btn btn-quincho" onclick="showInfo('quincho')"></div>
     <div class="tap-btn btn-inflables" onclick="showInfo('inflables')"></div>
 
+    <!-- FOOTER FIJO UBICACIÓN -->
     <div class="tap-btn btn-ubicacion" onclick="showInfo('ubicacion')"></div>
     <div class="tap-btn btn-aforo" onclick="showInfo('aforo')"></div>
     <div class="tap-btn btn-mascotas" onclick="showInfo('mascotas')"></div>
@@ -219,22 +220,22 @@
       horarios: {
         badge: "01 · HORARIOS Y RUIDO",
         title: "Horarios y Cierre",
-        body: "<ul><li><strong>Domingo a Jueves:</strong> 12:00 a 22:00 hrs.</li><li><strong>Viernes y Sábado:</strong> 12:00 a 01:00 hrs.</li><li>Corte riguroso de música al horario estipulado.</li></ul>"
+        body: "<ul><li><strong>Domingo a Jueves:</strong> 12:00 a 22:00 hrs.</li><li><strong>Viernes y Sábado:</strong> 12:00 a 01:00 hrs.</li><li>Corte riguroso de música y ruidos al horario fijado.</li></ul>"
       },
       salida: {
         badge: "02 · RECEPCIÓN Y LLAVES",
         title: "Salida y Devolución",
-        body: "<ul><li>Entrega al día siguiente hasta las <strong>10:00 AM como máximo</strong>.</li><li>Revisión de inventario con administración.</li></ul>"
+        body: "<ul><li>Entrega del recinto al día siguiente hasta las <strong>10:00 AM como máximo</strong>.</li><li>Revisión conjunta del inventario con la administración.</li></ul>"
       },
       quincho: {
         badge: "03 · QUINCHO Y PARRILLA",
         title: "Parrilla Segura",
-        body: "<ul><li>Parrillas entregadas <strong>100% apagadas</strong> y sin brasas activas.</li><li>Mesón de granito libre de grasas y comida.</li></ul>"
+        body: "<ul><li>Parrillas entregadas <strong>100% apagadas</strong> y sin brasas activas.</li><li>Mesones de granito limpios y sin residuos de comida.</li></ul>"
       },
       aseo: {
         badge: "04 · ASEO Y RESIDUOS",
         title: "Limpieza General",
-        body: "<ul><li>Baños y cocina entregados limpios y despejados.</li><li>Basura amarrada en bolsas resistentes dentro de los contenedores.</li></ul>"
+        body: "<ul><li>Baños y cocina entregados limpios y despejados.</li><li>Basura amarrada en bolsas resistentes dentro de los contenedores habilitados.</li></ul>"
       },
       muros: {
         badge: "05 · INFRAESTRUCTURA",
