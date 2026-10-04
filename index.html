@@ -45,7 +45,7 @@
       display: block;
     }
 
-    /* TÍTULO INSTITUCIONAL DECRETOS Y NORMAS */
+    /* TÍTULO SUPERIOR DE LA BOTONERA */
     .titulo-decretos {
       position: absolute;
       top: 36.6%;
@@ -315,7 +315,7 @@
     <!-- HUINCHA DE TEXTO -->
     <div class="ticker-franja">
       <div class="ticker-contenido">
-        🌿 Decreto Casa House: Entrega al día siguiente hasta las 10:00 AM &nbsp;&nbsp;•&nbsp;&nbsp; Cocina y baños limpios &nbsp;&nbsp;•&nbsp;&nbsp; Basura en bolsas separadas &nbsp;&nbsp;•&nbsp;&nbsp; Parrillas 100% apagadas &nbsp;&nbsp;•&nbsp;&nbsp; Aforo máx: 50 personas &nbsp;&nbsp;•&nbsp;&nbsp; 5 estacionamientos &nbsp;&nbsp;•&nbsp;&nbsp; ¡Cuidemos este espacio que nos sirve a todos! 🌿
+        🌿 Decreto Casa House: Entrega al día siguiente hasta las 10:00 AM &nbsp;&nbsp;•&nbsp;&nbsp; Prohibido pegar en muros o vidrios (usar solo listones de madera) &nbsp;&nbsp;•&nbsp;&nbsp; Cocina y baños limpios &nbsp;&nbsp;•&nbsp;&nbsp; Basura en bolsas separadas &nbsp;&nbsp;•&nbsp;&nbsp; Parrillas 100% apagadas &nbsp;&nbsp;•&nbsp;&nbsp; Aforo máx: 50 personas &nbsp;&nbsp;•&nbsp;&nbsp; 5 estacionamientos &nbsp;&nbsp;•&nbsp;&nbsp; ¡Cuidemos este espacio de todos! 🌿
       </div>
     </div>
 
@@ -390,32 +390,32 @@
       horarios: {
         badge: "01 · HORARIOS Y RUIDO",
         title: "Horarios y Cierre",
-        body: "<ul><li><strong>Domingo a Jueves:</strong> 12:00 a 22:00 hrs.</li><li><strong>Viernes y Sábado:</strong> 12:00 a 01:00 hrs.</li><li>El evento finaliza estrictamente a la 1 de la madrugada con corte de música.</li></ul>"
+        body: "<ul><li><strong>Domingo a Jueves:</strong> 12:00 a 22:00 hrs.</li><li><strong>Viernes y Sábado:</strong> 12:00 a 01:00 hrs.</li><li>El evento finaliza estrictamente a la 1 de la madrugada con corte total de música.</li></ul>"
       },
       salida: {
         badge: "02 · RECEPCIÓN Y LLAVES",
         title: "Salida y Devolución",
-        body: "<ul><li>La fiesta termina a la 1:00 AM, pero tienen plazo de entrega de la Casa House hasta las <strong>10:00 AM del día siguiente</strong>.</li><li>Pueden ordenar temprano en la mañana para entregar a las 10:00 AM impecable.</li></ul>"
+        body: "<ul><li>La fiesta concluye a la 1:00 AM, pero tienen plazo de entrega hasta las <strong>10:00 AM del día siguiente</strong>.</li><li>Pueden ordenar temprano en la mañana para entregar el recinto impecable.</li></ul>"
       },
       quincho: {
         badge: "03 · QUINCHO Y PARRILLA",
         title: "Parrilla Segura",
-        body: "<ul><li>Parrillas entregadas <strong>100% apagadas</strong> y sin brasas activas ni cenizas calientes.</li><li>Mesones de granito limpios y sin restos de comida.</li></ul>"
+        body: "<ul><li>Parrillas entregadas <strong>100% apagadas</strong>, sin brasas activas ni cenizas calientes.</li><li>Mesones de granito limpios y sin restos de comida o grasa.</li></ul>"
       },
       aseo: {
         badge: "04 · ASEO Y RESIDUOS",
         title: "Limpieza General",
-        body: "<ul><li>Baños y cocina deben quedar impecables, tal como fueron entregados.</li><li>Toda la basura clasificada y amarrada en bolsas separadas en los contenedores.</li></ul>"
+        body: "<ul><li>Baños y cocina deben quedar impecables, tal cual fueron entregados.</li><li>Toda la basura clasificada y amarrada en bolsas separadas en los contenedores.</li></ul>"
       },
       muros: {
-        badge: "05 · INFRAESTRUCTURA",
-        title: "Cuidado de Muros y Techos",
-        body: "<ul><li>Globos <strong>EXCLUSIVAMENTE</strong> en las maderas habilitadas para esto.</li><li>Cero cinta doble contacto, clavos o pegamentos en muros, ventanas o techos.</li></ul>"
+        badge: "05 · CUIDADO DE INFRAESTRUCTURA",
+        title: "Muros, Techo y Ventanales",
+        body: "<ul><li><strong>PROHIBIDO</strong> pegar con scotch, cinta doble faz, clavos o tornillos en muros, cielo, vidrios y empavonados para no dañar la pintura ni los acabados.</li><li>Para colgar globos o adornos deben usar <strong>EXCLUSIVAMENTE los listones de madera con ganchitos</strong> instalados especialmente para ello.</li></ul>"
       },
       inflables: {
         badge: "06 · JUEGOS Y JARDÍN",
         title: "Juegos Inflables",
-        body: "<ul><li>Sólo se permiten juegos inflables de <strong>tamaño mediano</strong>.</li><li><strong>PROHIBIDO</strong> instalarlos sobre el pasto o áreas verdes.</li></ul>"
+        body: "<ul><li>Sólo se permiten juegos inflables de <strong>tamaño mediano</strong>.</li><li><strong>PROHIBIDO</strong> instalarlos sobre el pasto o áreas verdes para proteger el jardín.</li></ul>"
       },
       aforo: {
         badge: "07 · CAPACIDAD",
@@ -455,7 +455,7 @@
       window.open('https://maps.google.com/?q=Condominio+Los+Olivos+Maipu', '_blank');
     }
 
-    // MOTOR DE VOZ FEMENINA NATURAL
+    // VOZ FEMENINA NATURAL CON ENFASIS EN MUROS Y DECRETO
     let isSpeaking = false;
     let availableVoices = [];
 
@@ -473,7 +473,6 @@
       if (!availableVoices.length) cargarVoces();
       const vocesEs = availableVoices.filter(v => v.lang.startsWith('es'));
       
-      // Filtro para priorizar perfiles de voz femenina natural
       const femenina = vocesEs.find(v => {
         const n = v.name.toLowerCase();
         return (
@@ -494,7 +493,7 @@
       return femenina || vocesEs[0] || null;
     }
 
-    const voiceMessage = "¡Hola vecina, hola vecino! Les damos la más cordial bienvenida a nuestra Casa House del Condominio Los Olivos de Maipú. Deseamos que disfruten al máximo su celebración junto a su familia y amigos. Para que todo resulte perfecto según el Decreto Casa House, recuerden que los días de semana el evento termina a las 22 horas, y los viernes y sábados finaliza a la 1 de la madrugada. No se preocupen por la entrega inmediata de noche: tienen plazo hasta el día siguiente a las 10 de la mañana para ordenar con calma y hacer la devolución. Les pedimos entregar la cocina y los baños impecables, tal como los recibieron, con la basura ordenada en bolsas separadas y la parrilla completamente apagada. Recuerden que el aforo es de 50 personas contando adultos y niños, disponen de 5 estacionamientos para sus visitas y sus mascotas son siempre bienvenidas. Sigamos estas normas para pasarlo excelente y cuidar juntos nuestra Casa House que nos sirve a todos. ¡Que tengan una fiesta maravillosa!";
+    const voiceMessage = "¡Hola vecina, hola vecino! Les damos la más cordial bienvenida a nuestra Casa House del Condominio Los Olivos de Maipú. Deseamos que disfruten al máximo su celebración junto a su familia y amigos. Para que todo resulte perfecto según el Decreto Casa House, recuerden que los días de semana el evento termina a las 22 horas, y los viernes y sábados finaliza a la 1 de la madrugada. No se preocupen por la entrega inmediata de noche: tienen plazo hasta el día siguiente a las 10 de la mañana para ordenar con calma y hacer la devolución. Es sumamente importante que por favor no peguen absolutamente nada en las paredes, techos, ventanales o empavonados con scotch, clavos o cinta doble faz, ya que se arruina la pintura y el trabajo realizado. Para colgar globos y adornos, deben usar exclusivamente los listones de madera que tienen ganchitos habilitados para ello. Además, les pedimos entregar la cocina y los baños impecables, la basura en bolsas separadas y la parrilla completamente apagada. Recuerden que el aforo es de 50 personas, cuentan con 5 estacionamientos de visita y sus mascotas son siempre bienvenidas. Sigamos estas normas para pasarlo excelente y cuidar juntos nuestra Casa House que nos sirve a todos. ¡Que tengan una fiesta maravillosa!";
 
     function toggleVoiceAudio() {
       const btn = document.getElementById('btnAudio');
@@ -527,8 +526,8 @@
         }
 
         utterance.lang = 'es-CL';
-        utterance.rate = 0.90;  // Ritmo pausado y conversacional
-        utterance.pitch = 1.15; // Modulación más aguda y cálida (femenina)
+        utterance.rate = 0.90;
+        utterance.pitch = 1.15;
 
         utterance.onstart = () => {
           isSpeaking = true;
