@@ -220,6 +220,7 @@
     }
 
     .modal-card {
+      position: relative;
       background: #ffffff;
       width: 100%;
       max-height: 85vh;
@@ -234,6 +235,32 @@
 
     .modal-overlay.active .modal-card {
       transform: translateY(0);
+    }
+
+    /* BOTÓN CIRCULAR CON X PARA CERRAR EL MODAL */
+    .btn-close-circle {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #eef4ec;
+      border: 1.5px solid #6b9459;
+      color: #213c1c;
+      font-size: 16px;
+      font-weight: 800;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: background 0.15s ease, transform 0.12s ease;
+      line-height: 1;
+    }
+
+    .btn-close-circle:active {
+      background: #d8e8d2;
+      transform: scale(0.92);
     }
 
     .modal-badge {
@@ -254,6 +281,7 @@
       color: #1e301c;
       margin-bottom: 12px;
       line-height: 1.25;
+      padding-right: 32px;
     }
 
     .modal-body {
@@ -319,15 +347,6 @@
       margin-top: 8px;
     }
 
-    .btn-close-default {
-      background: #31442d;
-      color: #ffffff;
-    }
-
-    .btn-close-default:active {
-      background: #1e2c1c;
-    }
-
     .btn-copy-address {
       background: #3d6836;
       color: #ffffff;
@@ -383,12 +402,13 @@
 
     <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
       <div class="modal-card" id="modalCard">
+        <!-- BOTÓN CIRCULAR DE CIERRE (X) -->
+        <button type="button" class="btn-close-circle" onclick="forceClose()" title="Cerrar ventana" aria-label="Cerrar ventana">✕</button>
+
         <div class="modal-badge" id="modalBadge">CLUB HOUSE</div>
         <h2 class="modal-title" id="modalTitle">Título</h2>
         <div class="modal-body" id="modalBody">Contenido</div>
-        <div id="modalButtonsContainer">
-          <button type="button" class="btn-modal-action btn-close-default" onclick="forceClose()">ENTENDIDO</button>
-        </div>
+        <div id="modalButtonsContainer"></div>
       </div>
     </div>
   </div>
@@ -498,9 +518,7 @@
           </button>
         `;
       } else {
-        btnContainer.innerHTML = `
-          <button type="button" class="btn-modal-action btn-close-default" onclick="forceClose()">ENTENDIDO</button>
-        `;
+        btnContainer.innerHTML = '';
       }
 
       document.getElementById('modalOverlay').classList.add('active');
@@ -579,60 +597,4 @@
       return femenina || vocesEs[0] || null;
     }
 
-    const voiceMessage = "¡Hola vecina, hola vecino! Les damos la más cordial bienvenida a nuestro Club House del Condominio Los Olivos de Maipú. Deseamos que disfruten al máximo su celebración junto a su familia y amigos. Para que todo resulte perfecto, recuerden que los días de semana el evento termina a las 22 horas, y los viernes y sábados finaliza a la 1 de la madrugada. No se preocupen por la entrega inmediata de noche: tienen plazo hasta el día siguiente a las 10 de la mañana para ordenar con calma y hacer la devolución. Es sumamente importante que por favor no peguen absolutamente nada en las paredes, techos, ventanales o empavonados con scotch, clavos o cinta doble faz, ya que se arruina la pintura y el trabajo realizado. Para colgar globos y adornos, deben usar exclusivamente los listones de madera que tienen ganchitos habilitados para ello. Además, les pedimos entregar la cocina y los baños impecables, la basura en bolsas separadas y la parrilla completamente apagada. Recuerden que el aforo es de 50 personas, cuentan con 5 estacionamientos de visita y sus mascotas son siempre bienvenidas. Sigamos estas normas para pasarlo excelente y cuidar juntos nuestro Club House que nos sirve a todos. ¡Que tengan una fiesta maravillosa!";
-
-    function toggleVoiceAudio() {
-      const btn = document.getElementById('btnAudio');
-      const audioTrack = document.getElementById('audioTrack');
-
-      if (audioTrack && audioTrack.src && !audioTrack.paused) {
-        audioTrack.pause();
-        audioTrack.currentTime = 0;
-        btn.classList.remove('playing');
-        return;
-      }
-
-      if (isSpeaking) {
-        window.speechSynthesis.cancel();
-        isSpeaking = false;
-        btn.classList.remove('playing');
-        return;
-      }
-
-      if (audioTrack && audioTrack.readyState >= 2) {
-        audioTrack.play();
-        btn.classList.add('playing');
-        audioTrack.onended = () => btn.classList.remove('playing');
-      } else if ('speechSynthesis' in window) {
-        const utterance = new SpeechSynthesisUtterance(voiceMessage);
-        const vozFem = seleccionarVozFemenina();
-
-        if (vozFem) {
-          utterance.voice = vozFem;
-        }
-
-        utterance.lang = 'es-CL';
-        utterance.rate = 0.90;
-        utterance.pitch = 1.15;
-
-        utterance.onstart = () => {
-          isSpeaking = true;
-          btn.classList.add('playing');
-        };
-
-        utterance.onend = () => {
-          isSpeaking = false;
-          btn.classList.remove('playing');
-        };
-
-        utterance.onerror = () => {
-          isSpeaking = false;
-          btn.classList.remove('playing');
-        };
-
-        window.speechSynthesis.speak(utterance);
-      }
-    }
-  </script>
-</body>
-</html>
+    const voiceMessage = "¡Hola vecina, hola vecino! Les damos la más cordial bienvenida a nuestro Club House del Condominio Los
