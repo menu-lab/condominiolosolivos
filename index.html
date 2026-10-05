@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Club House · Condominio Los Olivos de Maipú</title>
   
   <link rel="icon" type="image/png" href="favicon.png">
@@ -16,24 +16,27 @@
       user-select: none;
     }
 
-    body {
-      background-color: #0b1f1a;
+    html, body {
+      width: 100%;
+      height: 100%;
+      height: 100dvh;
+      overflow: hidden;
+      background-color: #051410;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
+      touch-action: none;
     }
 
     .app-wrapper {
       position: relative;
-      width: 100%;
-      max-width: 480px;
-      margin: auto;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.65);
+      height: 100dvh;
+      max-height: 100dvh;
+      aspect-ratio: 529 / 1024;
+      width: auto;
+      max-width: 100vw;
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.85);
       line-height: 0;
       overflow: hidden;
       background-color: #173b32;
@@ -41,11 +44,12 @@
 
     .bg-canvas {
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: fill;
       display: block;
+      pointer-events: none;
     }
 
-    /* TÍTULO SUPERIOR DE LA BOTONERA */
     .titulo-decretos {
       position: absolute;
       top: 36.6%;
@@ -53,7 +57,7 @@
       width: 100%;
       text-align: center;
       font-family: "Impact", "Arial Black", "Trebuchet MS", sans-serif;
-      font-size: 21px;
+      font-size: clamp(14px, 2.2vh, 21px);
       letter-spacing: 2.2px;
       text-transform: uppercase;
       color: #9cd188;
@@ -63,13 +67,12 @@
       line-height: normal;
     }
 
-    /* BOTÓN DE LOCUCIÓN FEMENINA */
     .btn-audio-voice {
       position: absolute;
       top: 3.2%;
       right: 5.0%;
-      width: 48px;
-      height: 48px;
+      width: clamp(38px, 5.2vh, 48px);
+      height: clamp(38px, 5.2vh, 48px);
       border-radius: 50%;
       background: #ffffff;
       box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
@@ -89,8 +92,8 @@
     }
 
     .btn-audio-voice svg {
-      width: 24px;
-      height: 24px;
+      width: 50%;
+      height: 50%;
       fill: #27431e;
     }
 
@@ -105,7 +108,6 @@
       100% { transform: scale(1.14); box-shadow: 0 0 20px rgba(184, 84, 52, 0.9); }
     }
 
-    /* HUINCHA DE LECTURA */
     .ticker-franja {
       position: absolute;
       top: 60.5%;
@@ -122,7 +124,7 @@
 
     .ticker-contenido {
       display: inline-block;
-      font-size: 15.5px;
+      font-size: clamp(11px, 1.6vh, 15.5px);
       font-weight: 700;
       color: #ffffff;
       text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95), 0 0 8px rgba(10, 30, 20, 0.9);
@@ -136,7 +138,6 @@
       100% { transform: translateX(-100%); }
     }
 
-    /* HOJAS CAYENDO SUAVEMENTE */
     .leaf-particle {
       position: absolute;
       pointer-events: none;
@@ -169,7 +170,6 @@
       }
     }
 
-    /* ZONAS TÁCTILES */
     .tap-btn {
       position: absolute;
       cursor: pointer;
@@ -184,13 +184,11 @@
       transform: scale(0.96);
     }
 
-    /* 1. MÓDULO HORIZONTAL CENTRAL */
     .btn-horarios   { top: 41.5%; left: 6.8%; width: 20.8%; height: 16.0%; }
     .btn-salida     { top: 41.5%; left: 29.8%; width: 20.5%; height: 16.0%; }
     .btn-quincho-top{ top: 41.5%; left: 52.0%; width: 20.5%; height: 16.0%; }
     .btn-aseo       { top: 41.5%; left: 74.0%; width: 19.5%; height: 16.0%; }
 
-    /* 2. CUADRÍCULA DE BOTONES CUADRADOS */
     .btn-muros      { top: 62.8%; left: 6.8%; width: 27.2%; height: 13.6%; }
     .btn-quincho    { top: 62.8%; left: 36.5%; width: 26.8%; height: 13.6%; }
     .btn-inflables  { top: 62.8%; left: 65.5%; width: 27.5%; height: 13.6%; }
@@ -199,7 +197,6 @@
     .btn-aforo      { top: 77.8%; left: 36.5%; width: 26.8%; height: 13.8%; }
     .btn-mascotas   { top: 77.8%; left: 65.5%; width: 27.5%; height: 13.8%; }
 
-    /* 3. MODAL POPUP */
     .modal-overlay {
       position: absolute;
       inset: 0;
@@ -224,6 +221,8 @@
     .modal-card {
       background: #ffffff;
       width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
       border-radius: 20px;
       padding: 24px 20px;
       box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
@@ -249,7 +248,7 @@
     }
 
     .modal-title {
-      font-size: 19px;
+      font-size: clamp(16px, 2.4vh, 20px);
       font-weight: 800;
       color: #1e301c;
       margin-bottom: 12px;
@@ -257,7 +256,7 @@
     }
 
     .modal-body {
-      font-size: 14px;
+      font-size: clamp(12.5px, 1.8vh, 14.5px);
       line-height: 1.5;
       color: #3e4a42;
       margin-bottom: 20px;
@@ -309,17 +308,14 @@
   <div class="app-wrapper" id="appWrapper">
     <img src="menu.jpg" alt="Club House Los Olivos" class="bg-canvas">
 
-    <!-- TÍTULO SUPERIOR DE LA BOTONERA -->
     <div class="titulo-decretos">DECRETOS Y NORMAS</div>
 
-    <!-- HUINCHA DE TEXTO -->
     <div class="ticker-franja">
       <div class="ticker-contenido">
         🌿 Club House: Entrega al día siguiente hasta las 10:00 AM &nbsp;&nbsp;•&nbsp;&nbsp; Prohibido pegar en muros o vidrios (usar solo listones de madera) &nbsp;&nbsp;•&nbsp;&nbsp; Cocina y baños limpios &nbsp;&nbsp;•&nbsp;&nbsp; Basura en bolsas separadas &nbsp;&nbsp;•&nbsp;&nbsp; Parrillas 100% apagadas &nbsp;&nbsp;•&nbsp;&nbsp; Aforo máx: 50 personas &nbsp;&nbsp;•&nbsp;&nbsp; 5 estacionamientos &nbsp;&nbsp;•&nbsp;&nbsp; ¡Cuidemos este espacio de todos! 🌿
       </div>
     </div>
 
-    <!-- BOTÓN DE LOCUCIÓN FEMENINA -->
     <button type="button" class="btn-audio-voice" id="btnAudio" onclick="toggleVoiceAudio()" title="Escuchar resumen hablado" aria-label="Escuchar resumen hablado">
       <svg viewBox="0 0 24 24">
         <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
@@ -328,7 +324,6 @@
 
     <audio id="audioTrack" src="audio.mp3" preload="none"></audio>
 
-    <!-- ZONAS INTERACTIVAS -->
     <div class="tap-btn btn-horarios" onclick="showInfo('horarios')"></div>
     <div class="tap-btn btn-salida" onclick="showInfo('salida')"></div>
     <div class="tap-btn btn-quincho-top" onclick="showInfo('quincho')"></div>
@@ -342,7 +337,6 @@
     <div class="tap-btn btn-aforo" onclick="showInfo('aforo')"></div>
     <div class="tap-btn btn-mascotas" onclick="showInfo('mascotas')"></div>
 
-    <!-- MODAL -->
     <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
       <div class="modal-card">
         <div class="modal-badge" id="modalBadge">CLUB HOUSE</div>
@@ -354,7 +348,6 @@
   </div>
 
   <script>
-    // HOJAS CAYENDO
     const wrapper = document.getElementById('appWrapper');
     const leafSVGs = [
       `<svg width="18" height="24" viewBox="0 0 20 28" fill="#588147"><path d="M10 0 C18 6, 20 18, 10 28 C0 18, 2 6, 10 0 Z"/></svg>`,
@@ -385,7 +378,6 @@
     setInterval(createLeaf, 2400);
     for (let i = 0; i < 4; i++) createLeaf();
 
-    // DATOS DE LOS MODALES ACTUALIZADOS A CLUB HOUSE
     const dataReglas = {
       horarios: {
         badge: "01 · HORARIOS Y RUIDO",
@@ -455,7 +447,6 @@
       window.open('https://maps.google.com/?q=Condominio+Los+Olivos+Maipu', '_blank');
     }
 
-    // VOZ FEMENINA NATURAL CON ENFASIS EN CLUB HOUSE Y PROTECCIÓN DE MUROS
     let isSpeaking = false;
     let availableVoices = [];
 
