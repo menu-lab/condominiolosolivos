@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Club House · Condominio Los Olivos de Maipú</title>
   
-  <!-- Favicon SVG integrado directo (Casita Club House) -->
+  <!-- Favicon SVG integrado (Casita Club House) -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path d='M32 6 L6 28 L14 28 L14 56 L50 56 L50 28 L58 28 Z' fill='%232e552a'/><path d='M26 36 h12 v20 h-12 Z' fill='%23ffffff'/><circle cx='32' cy='22' r='4' fill='%23ffffff'/></svg>">
 
   <style>
@@ -260,7 +260,7 @@
       font-size: clamp(12.5px, 1.8vh, 14.5px);
       line-height: 1.5;
       color: #3e4a42;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
     .modal-body ul {
@@ -282,25 +282,68 @@
       font-weight: bold;
     }
 
-    .btn-close {
-      width: 100%;
-      padding: 13px;
-      border: none;
-      border-radius: 11px;
-      background: #31442d;
-      color: #ffffff;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
+    .box-direccion {
+      background: #f4f8f2;
+      border: 1.5px dashed #6b9459;
+      border-radius: 12px;
+      padding: 12px;
+      margin: 12px 0;
+      text-align: center;
     }
 
-    .btn-close:active {
+    .box-direccion .dir-texto {
+      font-size: 14px;
+      font-weight: 700;
+      color: #213c1c;
+      margin-bottom: 4px;
+    }
+
+    .box-direccion .dir-sub {
+      font-size: 12px;
+      color: #556c50;
+    }
+
+    .btn-modal-action {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 11px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.15s ease;
+      margin-top: 8px;
+    }
+
+    .btn-close-default {
+      background: #31442d;
+      color: #ffffff;
+    }
+
+    .btn-close-default:active {
       background: #1e2c1c;
+    }
+
+    .btn-copy-address {
+      background: #3d6836;
+      color: #ffffff;
+    }
+
+    .btn-copy-address:active {
+      background: #284723;
     }
 
     .btn-action-map {
       background: #b85434;
-      margin-top: 10px;
+      color: #ffffff;
+    }
+
+    .btn-action-map:active {
+      background: #8e3c23;
     }
   </style>
 </head>
@@ -339,11 +382,13 @@
     <div class="tap-btn btn-mascotas" onclick="showInfo('mascotas')"></div>
 
     <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
-      <div class="modal-card">
+      <div class="modal-card" id="modalCard">
         <div class="modal-badge" id="modalBadge">CLUB HOUSE</div>
         <h2 class="modal-title" id="modalTitle">Título</h2>
         <div class="modal-body" id="modalBody">Contenido</div>
-        <button type="button" class="btn-close" onclick="forceClose()">ENTENDIDO</button>
+        <div id="modalButtonsContainer">
+          <button type="button" class="btn-modal-action btn-close-default" onclick="forceClose()">ENTENDIDO</button>
+        </div>
       </div>
     </div>
   </div>
@@ -378,6 +423,8 @@
 
     setInterval(createLeaf, 2400);
     for (let i = 0; i < 4; i++) createLeaf();
+
+    const direccionOficial = "Avenida Presidente Jorge Alessandri Rodríguez 1431, Maipú";
 
     const dataReglas = {
       horarios: {
@@ -421,9 +468,15 @@
         body: "<ul><li>Mascotas <strong>bienvenidas sin restricción</strong>.</li><li>Cuidemos juntos el Club House para pasarlo excelente y mantener este espacio que nos sirve a todos.</li></ul>"
       },
       ubicacion: {
-        badge: "09 · UBICACIÓN Y ACCESO",
+        badge: "UBICACIÓN Y ACCESO",
         title: "Condominio Los Olivos de Maipú",
-        body: "<p style='margin-bottom:12px;'>Abre el mapa directo del Club House para compartir con tus invitados por WhatsApp o Waze:</p><button type='button' class='btn-close btn-action-map' onclick='openMap()'>📍 ABRIR EN GOOGLE MAPS</button>"
+        isUbicacion: true,
+        direccionTexto: direccionOficial,
+        body: `<p>Abre el mapa directo al Club House para compartir con tus invitados por WhatsApp o Waze, o copia la dirección física:</p>
+               <div class="box-direccion">
+                 <div class="dir-texto">📍 ${direccionOficial}</div>
+                 <div class="dir-sub">Condominio Los Olivos de Maipú (Club House)</div>
+               </div>`
       }
     };
 
@@ -433,6 +486,23 @@
       document.getElementById('modalBadge').innerText = item.badge;
       document.getElementById('modalTitle').innerText = item.title;
       document.getElementById('modalBody').innerHTML = item.body;
+      
+      const btnContainer = document.getElementById('modalButtonsContainer');
+      if (item.isUbicacion) {
+        btnContainer.innerHTML = `
+          <button type="button" class="btn-modal-action btn-copy-address" id="btnCopiar" onclick="copiarDireccion('${item.direccionTexto}')">
+            📋 COPIAR DIRECCIÓN
+          </button>
+          <button type="button" class="btn-modal-action btn-action-map" onclick="openMap()">
+            📍 ABRIR EN GOOGLE MAPS / WAZE
+          </button>
+        `;
+      } else {
+        btnContainer.innerHTML = `
+          <button type="button" class="btn-modal-action btn-close-default" onclick="forceClose()">ENTENDIDO</button>
+        `;
+      }
+
       document.getElementById('modalOverlay').classList.add('active');
     }
 
@@ -445,7 +515,33 @@
     }
 
     function openMap() {
-      window.open('https://maps.google.com/?q=Condominio+Los+Olivos+Maipu', '_blank');
+      window.open('https://maps.google.com/?q=' + encodeURIComponent(direccionOficial), '_blank');
+    }
+
+    function copiarDireccion(texto) {
+      navigator.clipboard.writeText(texto).then(() => {
+        const btn = document.getElementById('btnCopiar');
+        if (btn) {
+          btn.innerText = '✅ ¡DIRECCIÓN COPIADA!';
+          setTimeout(() => {
+            btn.innerHTML = '📋 COPIAR DIRECCIÓN';
+          }, 2500);
+        }
+      }).catch(() => {
+        const temp = document.createElement('textarea');
+        temp.value = texto;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand('copy');
+        document.body.removeChild(temp);
+        const btn = document.getElementById('btnCopiar');
+        if (btn) {
+          btn.innerText = '✅ ¡DIRECCIÓN COPIADA!';
+          setTimeout(() => {
+            btn.innerHTML = '📋 COPIAR DIRECCIÓN';
+          }, 2500);
+        }
+      });
     }
 
     let isSpeaking = false;
@@ -464,7 +560,6 @@
     function seleccionarVozFemenina() {
       if (!availableVoices.length) cargarVoces();
       const vocesEs = availableVoices.filter(v => v.lang.startsWith('es'));
-      
       const femenina = vocesEs.find(v => {
         const n = v.name.toLowerCase();
         return (
